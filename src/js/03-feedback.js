@@ -23,7 +23,7 @@ getFeedbackFormState();
 
 const onFormSubmit = (e) => {
     e.preventDefault();
-    sendedFeedback = localStorage.getItem('feedback-form-state');
+    const sendedFeedback = localStorage.getItem('feedback-form-state');
     if (sendedFeedback) {
         console.log(JSON.parse(sendedFeedback));
     };
