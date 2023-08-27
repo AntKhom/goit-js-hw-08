@@ -8,9 +8,8 @@ const refs = {
 };
 
 const feedbackFormState = {
-    email: '',
-    message: '',
-}
+
+};
 
 const getFeedbackFormState = (e) => {    
     const savedFeedback = localStorage.getItem('feedback-form-state');
@@ -32,20 +31,9 @@ const onFormSubmit = (e) => {
     localStorage.removeItem('feedback-form-state');
 };
 
-const onEmailInput = (e) => {  
+const onFeedbackFormInput = (e) => {
     try {
-        const email = e.currentTarget.value;
-        feedbackFormState.email = email;
-        localStorage.setItem('feedback-form-state',JSON.stringify(feedbackFormState));
-    } catch(error) {
-        console.log(error.message);
-    }
-};
-
-const onTextareaInput = (e) => {
-    try {
-        const textMessage = e.currentTarget.value;
-        feedbackFormState.message = textMessage;
+        feedbackFormState[e.target.name] = e.target.value;
         localStorage.setItem('feedback-form-state',JSON.stringify(feedbackFormState));
     } catch(error) {
         console.log(error.message);
@@ -53,7 +41,5 @@ const onTextareaInput = (e) => {
     
 };
 
-
 refs.form.addEventListener('submit', onFormSubmit);
-refs.email.addEventListener('input', throttle(onEmailInput,500));
-refs.textarea.addEventListener('input', throttle(onTextareaInput,500));
+refs.form.addEventListener('input', onFeedbackFormInput);
