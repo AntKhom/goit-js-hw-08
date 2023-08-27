@@ -42,4 +42,4 @@ const onFeedbackFormInput = (e) => {
 };
 
 refs.form.addEventListener('submit', onFormSubmit);
-refs.form.addEventListener('input', onFeedbackFormInput);
+refs.form.addEventListener('input', throttle(onFeedbackFormInput,500));
