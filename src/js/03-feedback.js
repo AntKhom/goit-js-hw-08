@@ -23,10 +23,18 @@ getFeedbackFormState();
 
 const onFormSubmit = (e) => {
     e.preventDefault();
-    const sendedFeedback = localStorage.getItem('feedback-form-state');
-    if (sendedFeedback) {
-        console.log(JSON.parse(sendedFeedback));
+
+    if (e.currentTarget.elements.email.value == '' || e.currentTarget.elements.message.value == '') {
+        return alert('все поля должны быть заполнены');
     };
+
+    // console.log(e.target.elements.email.name, '....', e.target.elements.email.value)
+    // console.log(e.target.elements.message.name, '....', e.target.elements.message.value)
+    const sendedFeedback = {
+        [e.target.elements.email.name]: e.target.elements.email.value,
+        [e.target.elements.message.name] : e.target.elements.message.value,
+    };
+    console.log(sendedFeedback);
     e.currentTarget.reset();
     localStorage.removeItem('feedback-form-state');
 };
