@@ -11,6 +11,6 @@ player.on('timeupdate',
         localStorage.setItem("videoplayer-current-time", data.seconds), 1000) 
 );
 
-player.setCurrentTime(localStorage.getItem("videoplayer-current-time")===null ? 0 : localStorage.getItem("videoplayer-current-time"));
+player.setCurrentTime(localStorage.getItem("videoplayer-current-time") || 0);
 
 

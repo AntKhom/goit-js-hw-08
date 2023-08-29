@@ -14,8 +14,8 @@ const feedbackFormState = {
 const getFeedbackFormState = (e) => {    
     const savedFeedback = localStorage.getItem('feedback-form-state');
     if (savedFeedback) {
-        refs.email.value = JSON.parse(savedFeedback).email;
-        refs.textarea.value = JSON.parse(savedFeedback).message;
+        refs.email.value = (JSON.parse(savedFeedback).email || null);
+        refs.textarea.value = (JSON.parse(savedFeedback).message || null);
     };     
 };
 
