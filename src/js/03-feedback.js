@@ -7,9 +7,9 @@ const refs = {
     textarea: document.querySelector('.feedback-form [name=message]'),
 };
 
-const feedbackFormState = {
+// const feedbackFormState = {
 
-};
+//};
 
 const getFeedbackFormState = (e) => {    
     const savedFeedback = localStorage.getItem('feedback-form-state');
@@ -20,6 +20,8 @@ const getFeedbackFormState = (e) => {
 };
 
 getFeedbackFormState();
+const feedbackFormState = (JSON.parse(localStorage.getItem('feedback-form-state')) || {});
+
 
 const onFormSubmit = (e) => {
     e.preventDefault();
@@ -37,17 +39,26 @@ const onFormSubmit = (e) => {
     console.log(sendedFeedback);
     e.currentTarget.reset();
     localStorage.removeItem('feedback-form-state');
+    clearObj(feedbackFormState);
+    // console.log(sendedFeedback);
 };
 
 const onFeedbackFormInput = (e) => {
     try {
-        feedbackFormState[e.target.name] = e.target.value;
+        feedbackFormState[e.target.name]=e.target.value;
+        // console.log(feedbackFormState)
         localStorage.setItem('feedback-form-state',JSON.stringify(feedbackFormState));
     } catch(error) {
         console.log(error.message);
     }
     
 };
+
+const clearObj=(obj) => {
+    for (const key in obj) {
+        delete obj[key];
+    };
+}
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(onFeedbackFormInput,500));
